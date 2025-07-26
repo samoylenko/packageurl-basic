@@ -1,0 +1,20 @@
+[versions]
+konform = "0.11.1"
+kotlin = "2.2.0"
+kotlin-logging = "7.0.7"
+kotlinx-serialization = "1.9.0"
+logback = "1.5.18"
+maven-publish = "0.31.0"
+urlencoder = "1.6.0"
+
+[plugins]
+kotlin-plugin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+
+[libraries]
+konform = { group = "io.konform", name = "konform", version.ref = "konform" }
+kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version.ref = "kotlin-logging" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
+urlencoder = { group = "net.thauvin.erik.urlencoder", name = "urlencoder-lib", version.ref = "urlencoder" }
