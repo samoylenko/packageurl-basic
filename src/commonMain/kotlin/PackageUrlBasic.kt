@@ -189,14 +189,7 @@ class PackageUrlBasic private constructor(
             if (!coordinatesOnly) {
                 qualifiers?.let {
                     append('?')
-                    append(it.entries.joinToString("&") { qualifier ->
-                        val value = if (qualifier.key.contentEquals("checksums", ignoreCase = true))
-                            qualifier.value.split(',').joinToString(",") { checksum -> UrlEncoderUtil.encode(checksum) }
-                        else
-                            UrlEncoderUtil.encode(qualifier.value)
-
-                        "${qualifier.key}=${value}"
-                    })
+                    append(it.entries.joinToString("&") { "${it.key}=${UrlEncoderUtil.encode(it.value)}" })
                 }
 
                 subpath?.let {
