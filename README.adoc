@@ -17,7 +17,7 @@ So:
 
 . We refuse to maintain special implementations for any "known" items such as "known package types" or "known qualifiers", etc.
 . Therefore, we don't support any special cases for known package types such as Maven, Docker, PyPI, etc.
-. And we still encode qualifier values for `vers`, `repository_url`, `download_url`, `vcs_url`, etc.
+. And we still encode all qualifier values (so no special treatment for `checksum`, `vers`, `repository_url`, `download_url`, `vcs_url`, etc.)
 
 == Supported platforms
 
