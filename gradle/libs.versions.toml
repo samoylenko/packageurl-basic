@@ -1,10 +1,10 @@
 [versions]
 konform = "0.11.1"
-kotlin = "2.2.0"
-kotlin-logging = "7.0.7"
+kotlin = "2.2.20"
+kotlin-logging = "7.0.13"
 kotlinx-serialization = "1.9.0"
 logback = "1.5.18"
-maven-publish = "0.31.0"
+maven-publish = "0.34.0"
 urlencoder = "1.6.0"
 
 [plugins]

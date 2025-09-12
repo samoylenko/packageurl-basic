@@ -1,4 +1,3 @@
-import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
@@ -49,7 +48,6 @@ kotlin {
         jvmTest.dependencies {
             implementation(libs.logback.classic)
         }
-
     }
 }
 
@@ -59,8 +57,7 @@ signing {
 
 mavenPublishing {
     signAllPublications()
-
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral()
 
     pom {
         name = "PackageURL Basic - Kotlin Multiplatform"
