@@ -5,6 +5,9 @@ package data
  * (MIT License, Copyright (c) the purl authors)
  *
  * Modified to flag tests that our implementation fails due to different specification interpretation.
+ *
+ * Total count: 59
+ * Ignored count: 28
  */
 const val TEST_SUITE_DATA_MODIFIED_RAW =
     """
@@ -202,7 +205,8 @@ const val TEST_SUITE_DATA_MODIFIED_RAW =
     "version": "6.0.1304",
     "qualifiers": null,
     "subpath": null,
-    "is_invalid": false
+    "is_invalid": false,
+    "ignore_reason": "Special case specific"
   },
   {
     "description": "pypi names have special rules and not case sensitive",
@@ -311,7 +315,8 @@ const val TEST_SUITE_DATA_MODIFIED_RAW =
     "version": "0.3-3",
     "qualifiers": null,
     "subpath": null,
-    "is_invalid": false
+    "is_invalid": false,
+    "ignore_reason": "Special case specific"
   },
   {
     "description": "valid maven purl containing a space in the version and qualifier",
@@ -409,7 +414,8 @@ const val TEST_SUITE_DATA_MODIFIED_RAW =
     "version": "0.9.1",
     "qualifiers": null,
     "subpath": null,
-    "is_invalid": false
+    "is_invalid": false,
+    "ignore_reason": "Special case specific"
   },
   {
     "description": "invalid cran purl without name",
@@ -447,7 +453,8 @@ const val TEST_SUITE_DATA_MODIFIED_RAW =
     "version": "5.4.3",
     "qualifiers": null,
     "subpath": null,
-    "is_invalid": false
+    "is_invalid": false,
+    "ignore_reason": "Special case specific"
   },
   {
     "description": "invalid swift purl without namespace",
@@ -498,7 +505,8 @@ const val TEST_SUITE_DATA_MODIFIED_RAW =
     "version": "1.2.1",
     "qualifiers": null,
     "subpath": null,
-    "is_invalid": false
+    "is_invalid": false,
+    "ignore_reason": "Special case specific"
   },
   {
     "description": "name and version are always required",
@@ -611,7 +619,8 @@ const val TEST_SUITE_DATA_MODIFIED_RAW =
     "version": "1.55",
     "qualifiers": null,
     "subpath": null,
-    "is_invalid": false
+    "is_invalid": false,
+    "ignore_reason": "Special case specific"
   },
   {
     "description": "cpan module name are case sensitive",
@@ -662,7 +671,8 @@ const val TEST_SUITE_DATA_MODIFIED_RAW =
     "version": "1.55",
     "qualifiers": null,
     "subpath": null,
-    "is_invalid": false
+    "is_invalid": false,
+    "ignore_reason": "Special case specific"
   },
   {
     "description": "cpan valid module name without version",
@@ -674,7 +684,8 @@ const val TEST_SUITE_DATA_MODIFIED_RAW =
     "version": null,
     "qualifiers": null,
     "subpath": null,
-    "is_invalid": false
+    "is_invalid": false,
+    "ignore_reason": "Special case specific"
   },
   {
     "description": "ensure namespace allows multiple segments",

@@ -6,7 +6,7 @@ import io.konform.validation.ifPresent
 import io.konform.validation.onEach
 
 /**
- * Original specification: https://github.com/package-url/purl-spec/blob/main/PURL-SPECIFICATION.rst
+ * Original specification: https://github.com/package-url/purl-spec/blob/main/purl-specification.md
  *
  * Implementation specific validations
  */

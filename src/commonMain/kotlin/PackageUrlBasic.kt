@@ -17,7 +17,7 @@ public class PackageUrlBasic private constructor(
 
         private val logger = KotlinLogging.logger {}
 
-        public inline fun build(type: String, name: String, block: Builder.() -> Unit): PackageUrlBasic =
+        public inline fun build(type: String, name: String, block: Builder.() -> Unit = {}): PackageUrlBasic =
             Builder(type = type, name = name).apply(block).build()
 
         public fun parse(purl: String, strict: Boolean = true): PackageUrlBasic {
@@ -208,13 +208,34 @@ public class PackageUrlBasic private constructor(
         public fun qualifiers(qualifiers: Map<String, String>?): Builder = apply { this.qualifiers = qualifiers }
         public fun subpath(subpath: String?): Builder = apply { this.subpath = subpath }
 
-        public fun build(): PackageUrlBasic = PackageUrlBasic(
-            type = type,
-            name = name,
-            version = version,
-            namespace = namespace,
-            qualifiers = qualifiers,
-            subpath = subpath,
-        )
+        public fun build(): PackageUrlBasic =
+            if ((namespace == null) && (name.contains('/'))) {
+                PackageUrlBasic(
+                    type = type,
+                    name = name.substringAfterLast('/'),
+                    version = version,
+                    namespace = name.substringBeforeLast('/'),
+                    qualifiers = qualifiers,
+                    subpath = subpath,
+                )
+            } else {
+                PackageUrlBasic(
+                    type = type,
+                    name = name,
+                    version = version,
+                    namespace = namespace,
+                    qualifiers = qualifiers,
+                    subpath = subpath,
+                )
+            }
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
+        other as PackageUrlBasic
+        return this.canonical == other.canonical
+    }
+
+    override fun hashCode(): Int = this.canonical.hashCode()
 }

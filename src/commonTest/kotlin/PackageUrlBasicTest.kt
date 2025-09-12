@@ -50,16 +50,24 @@ class PackageUrlBasicTest {
     @Test
     fun mustIgnoreDoubleSlash() {
         assertEquals(
-            PackageUrlBasic.parse("pkg:gem/ruby-advisory-db-check@0.12.4").toString(),
-            PackageUrlBasic.parse("pkg://gem/ruby-advisory-db-check@0.12.4").toString()
+            PackageUrlBasic.parse("pkg:gem/ruby-advisory-db-check@0.12.4"),
+            PackageUrlBasic.parse("pkg://gem/ruby-advisory-db-check@0.12.4")
         )
     }
 
     @Test
     fun mustSkipPeriodPaths() {
         assertEquals(
-            PackageUrlBasic.parse("pkg:gem/ruby-advisory-db-check@0.12.4#some/path").toString(),
-            PackageUrlBasic.parse("pkg://gem/ruby-advisory-db-check@0.12.4#.././some/./../path/./.././").toString()
+            PackageUrlBasic.parse("pkg:gem/ruby-advisory-db-check@0.12.4#some/path"),
+            PackageUrlBasic.parse("pkg://gem/ruby-advisory-db-check@0.12.4#.././some/./../path/./.././")
+        )
+    }
+
+    @Test
+    fun userPassedNamespaceWithName() {
+        assertEquals(
+            PackageUrlBasic.build("generic", "name") { namespace("namespace/and") },
+            PackageUrlBasic.build("generic", "namespace/and/name")
         )
     }
 
@@ -94,12 +102,10 @@ class PackageUrlBasicTest {
                     assertNotNull(it.purl, "Test suite data issue")
                     assertNotNull(it.type, "Test suite data issue")
 
-                    //
                     val parsedCanonicalPurl = PackageUrlBasic.parse(it.canonicalPurl)
                     assertEquals(
-                        it.canonicalPurl.lowercase(), // MODIFIED!
-                        parsedCanonicalPurl.toString()
-                            .lowercase(), // encoded chars are capitals while everything else is lowercase in our implementation
+                        it.canonicalPurl,
+                        parsedCanonicalPurl.toString(),
                         "Parsed canonical PURL doesn't match the original"
                     )
 
@@ -164,8 +170,8 @@ class PackageUrlBasicTest {
                         }
 
                     assertEquals(
-                        parsedTestPurl.toString(),
-                        createdFromParsedTestPurlComponents.toString(),
+                        parsedTestPurl,
+                        createdFromParsedTestPurlComponents,
                         "parsing the test purl then re-building a purl from these parsed components should return the test canonical purl"
                     )
 
@@ -178,8 +184,8 @@ class PackageUrlBasicTest {
                         }
 
                     assertEquals(
-                        parsedCanonicalPurl.toString(),
-                        createdFromTestComponents.toString(),
+                        parsedCanonicalPurl,
+                        createdFromTestComponents,
                         "building a purl from the test components should return the test canonical purl"
                     )
                 }
