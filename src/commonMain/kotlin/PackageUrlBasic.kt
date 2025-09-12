@@ -3,7 +3,7 @@ package dev.samoylenko.packageurl
 import io.github.oshai.kotlinlogging.KotlinLogging
 import net.thauvin.erik.urlencoder.UrlEncoderUtil
 
-class PackageUrlBasic private constructor(
+public class PackageUrlBasic private constructor(
     namespace: String? = null,
     type: String,
     name: String,
@@ -11,16 +11,16 @@ class PackageUrlBasic private constructor(
     qualifiers: Map<String, String>? = null,
     subpath: String? = null,
 ) {
-    companion object {
+    public companion object {
 
-        const val SCHEME: String = "pkg"
+        private const val SCHEME: String = "pkg"
 
         private val logger = KotlinLogging.logger {}
 
-        inline fun build(type: String, name: String, block: Builder.() -> Unit) =
+        public inline fun build(type: String, name: String, block: Builder.() -> Unit): PackageUrlBasic =
             Builder(type = type, name = name).apply(block).build()
 
-        fun parse(purl: String, strict: Boolean = true): PackageUrlBasic {
+        public fun parse(purl: String, strict: Boolean = true): PackageUrlBasic {
 
             logger.trace { "purl = '${purl}'" }
 
@@ -103,25 +103,16 @@ class PackageUrlBasic private constructor(
     }
 
     @Suppress("unused")
-    val scheme = SCHEME
-
-    val type: String = type.lowercase()
-
-    val name: String
-
-    val version: String?
-
-    val namespace: String?
-
-    val qualifiers: Map<String, String>?
-
-    val subpath: String?
-
-    val canonical: String
-
-    val coordinates: String
-
-    val isValid: Boolean
+    public val scheme: String = SCHEME
+    public val type: String = type.lowercase()
+    public val name: String
+    public val version: String?
+    public val namespace: String?
+    public val qualifiers: Map<String, String>?
+    public val subpath: String?
+    public val canonical: String
+    public val coordinates: String
+    public val isValid: Boolean
 
     init {
         this.namespace = namespace
@@ -187,9 +178,13 @@ class PackageUrlBasic private constructor(
             }
 
             if (!coordinatesOnly) {
-                qualifiers?.let {
+                qualifiers?.let { qualifiers ->
                     append('?')
-                    append(it.entries.joinToString("&") { "${it.key}=${UrlEncoderUtil.encode(it.value)}" })
+                    append(
+                        qualifiers.entries.joinToString("&") { qualifier ->
+                            "${qualifier.key}=${UrlEncoderUtil.encode(qualifier.value)}"
+                        }
+                    )
                 }
 
                 subpath?.let {
@@ -199,7 +194,7 @@ class PackageUrlBasic private constructor(
             }
         }
 
-    class Builder(
+    public class Builder(
         private val type: String,
         private val name: String
     ) {
@@ -208,12 +203,12 @@ class PackageUrlBasic private constructor(
         private var qualifiers: Map<String, String>? = null
         private var subpath: String? = null
 
-        fun version(version: String?) = apply { this.version = version }
-        fun namespace(namespace: String?) = apply { this.namespace = namespace }
-        fun qualifiers(qualifiers: Map<String, String>?) = apply { this.qualifiers = qualifiers }
-        fun subpath(subpath: String?) = apply { this.subpath = subpath }
+        public fun version(version: String?): Builder = apply { this.version = version }
+        public fun namespace(namespace: String?): Builder = apply { this.namespace = namespace }
+        public fun qualifiers(qualifiers: Map<String, String>?): Builder = apply { this.qualifiers = qualifiers }
+        public fun subpath(subpath: String?): Builder = apply { this.subpath = subpath }
 
-        fun build() = PackageUrlBasic(
+        public fun build(): PackageUrlBasic = PackageUrlBasic(
             type = type,
             name = name,
             version = version,

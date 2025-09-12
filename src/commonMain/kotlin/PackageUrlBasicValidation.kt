@@ -10,9 +10,9 @@ import io.konform.validation.onEach
  *
  * Implementation specific validations
  */
-object PackageUrlBasicValidation {
+internal object PackageUrlBasicValidation {
 
-    fun strictValidation() = Validation<PackageUrlBasic> {
+    internal fun strictValidation(): Validation<PackageUrlBasic> = Validation {
         PackageUrlBasic::type {
             pattern("^[a-z0-9.-]+$") hint "'{value}' <- The package type MUST be composed only of ASCII letters and numbers, period '.', and dash '-'. Must be lowercase."
             run(mustStartWithAsciiLetter)
@@ -31,11 +31,11 @@ object PackageUrlBasicValidation {
         }
     }
 
-    val mustStartWithAsciiLetter = Validation<String> {
+    internal val mustStartWithAsciiLetter = Validation<String> {
         pattern("^[A-Za-z].*") hint "'{value}' <- MUST start with an ASCII letter."
     }
 
-    val qualifierIllegalCharacters = Validation<String> {
+    internal val qualifierIllegalCharacters = Validation<String> {
         val restrictedChars = listOf('?', '&')
 
         constrain("'{value}' <- Must not contain any of: ${restrictedChars.joinToString(", ")}") {

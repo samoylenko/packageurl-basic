@@ -24,6 +24,8 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
+
     withSourcesJar(publish = true)
 
     js {
