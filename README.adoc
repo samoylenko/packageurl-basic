@@ -1,16 +1,15 @@
 = PackageURL (PURL) Basic
 
-A very basic library for working with PackageURL / PURL (Kotlin Multiplatform).
+A very basic library for parsing PackageURL / PURL (Kotlin Multiplatform).
 
-[WARNING,caption="Check the official libraries before using this!"]
+[WARNING]
 ====
+⚠️ *This implementation fails the PURL specification https://github.com/package-url/purl-spec/blob/main/docs/tests.md[test suite]* ⚠️
+
 Before using this library, please ensure you check the libraries created by the original PackageURL team here: https://github.com/package-url.
-
-*This library is designed to provide only basic functionality, utilizing a slightly different implementation of the standard than that of the original authors*.
-While we strive to follow the specification to the letter, we do fail multiple tests on https://github.com/package-url/purl-spec/blob/main/test-suite-data.json[the original PURL test suite] due to respectfully disagreeing with their vision of how the specification should be implemented.
 ====
 
-== Deviations from the specification and the reasons for failing the original PURL specification tests
+== Deviations from the specification
 
 The goal of this implementation is to simply parse/create a PURL and let the downstream system handle the rest in the simplest form possible.
 So:
@@ -29,6 +28,6 @@ Currently only supports JVM and JS platforms.
 [source,kotlin]
 ----
 dependencies {
-    implementation("dev.samoylenko:packageurl-basic:0.1.0")
+    implementation("dev.samoylenko:packageurl-basic:0.1.1")
 }
 ----
