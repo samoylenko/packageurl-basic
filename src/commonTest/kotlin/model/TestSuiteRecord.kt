@@ -2,18 +2,17 @@ package model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import model.serialization.FlexibleFieldTypeSerializer
 
 @Serializable
 data class TestSuiteRecord(
     val description: String,
-    val purl: String?,
-    @SerialName("canonical_purl") val canonicalPurl: String?,
-    val type: String?,
-    val name: String?,
-    val version: String?,
-    val namespace: String?,
-    val qualifiers: Map<String, String>?,
-    val subpath: String?,
-    @SerialName("is_invalid") val isInvalid: Boolean,
-    @SerialName("ignore_reason") val ignoreReason: String? = null
+    @SerialName("test_group") val testGroup: String,
+    @SerialName("test_type") val testType: TestType,
+    @SerialName("expected_output") val expectedOutput: String?,
+    @SerialName("expected_failure") val expectedFailure: Boolean,
+    @SerialName("expected_failure_reason") val expectedFailureReason: String,
+
+    @Serializable(with = FlexibleFieldTypeSerializer::class)
+    val input: InputParams,
 )

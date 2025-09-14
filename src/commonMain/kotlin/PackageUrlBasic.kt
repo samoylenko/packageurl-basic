@@ -118,10 +118,10 @@ public class PackageUrlBasic private constructor(
         this.namespace = namespace
             ?.trim('/')
             ?.split('/')
-            ?.joinToString("/") { it.lowercase() }
+            ?.joinToString("/")
             ?.ifBlank { null }
 
-        this.name = name.trim('/').lowercase() // Deviate from the specification: name is always lowercase
+        this.name = name.trim('/')
 
         this.version = version
 

@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 
 group = "dev.samoylenko"
-version = "0.1.1"
+version = "0.2.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -19,7 +19,6 @@ plugins {
 
     alias(libs.plugins.kotlin.plugin.multiplatform)
     alias(libs.plugins.kotlin.plugin.serialization)
-
     alias(libs.plugins.maven.publish)
 }
 
@@ -44,11 +43,19 @@ kotlin {
 
         commonTest.dependencies {
             implementation(kotlin("test"))
+
+            implementation(libs.kotlinx.coroutines.test)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.ktor.client.core)
         }
 
         jvmTest.dependencies {
+            implementation(libs.ktor.client.cio) // https://ktor.io/docs/client-engines.html#limitations
             implementation(libs.logback.classic)
+        }
+
+        jsTest.dependencies {
+            implementation(libs.ktor.client.js) // https://ktor.io/docs/client-engines.html#limitations
         }
     }
 }

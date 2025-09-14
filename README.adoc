@@ -14,9 +14,8 @@ Before using this library, please ensure you check the libraries created by the 
 The goal of this implementation is to simply parse/create a PURL and let the downstream system handle the rest in the simplest form possible.
 So:
 
-. We refuse to maintain special implementations for any "known" items such as "known package types" or "known qualifiers", etc.
+. We do not maintain special implementations for any "known" items such as "known package types" or "known qualifiers", etc.
 . Therefore, we don't support any special cases for known package types such as Maven, Docker, PyPI, etc.
-. The most notable consequence is that our canonical purls are always lowercase, which fails the majority of case-sensitive special case purl examples
 . And we still encode all qualifier values (so no special treatment for `checksum`, `vers`, `repository_url`, `download_url`, `vcs_url`, etc.)
 
 == Supported platforms
@@ -28,6 +27,6 @@ Currently only supports JVM and JS platforms.
 [source,kotlin]
 ----
 dependencies {
-    implementation("dev.samoylenko:packageurl-basic:0.1.1")
+    implementation("dev.samoylenko:packageurl-basic:0.2.0")
 }
 ----
