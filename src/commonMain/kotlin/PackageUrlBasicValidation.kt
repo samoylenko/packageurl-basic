@@ -1,6 +1,7 @@
 package dev.samoylenko.packageurl
 
 import io.konform.validation.Validation
+import io.konform.validation.constraints.notBlank
 import io.konform.validation.constraints.pattern
 import io.konform.validation.ifPresent
 import io.konform.validation.onEach
@@ -13,6 +14,10 @@ import io.konform.validation.onEach
 internal object PackageUrlBasicValidation {
 
     internal fun strictValidation(): Validation<PackageUrlBasic> = Validation {
+        PackageUrlBasic::name {
+            notBlank() hint "Name is required and cannot be blank"
+        }
+
         PackageUrlBasic::type {
             pattern("^[a-z0-9.-]+$") hint "'{value}' <- The package type MUST be composed only of ASCII letters and numbers, period '.', and dash '-'. Must be lowercase."
             run(mustStartWithAsciiLetter)
