@@ -1,9 +1,12 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 
 group = "dev.samoylenko"
-version = "0.2.0"
+version = "0.2.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -27,12 +30,38 @@ kotlin {
 
     withSourcesJar(publish = true)
 
+    jvm()
+
     js {
-        nodejs {}
-        browser {}
+        browser()
+        nodejs()
     }
 
-    jvm {}
+    wasmJs {
+        browser()
+        nodejs()
+    }
+
+    wasmWasi {
+        nodejs()
+    }
+
+    iosArm64()
+    iosSimulatorArm64()
+    iosX64()
+    linuxArm64()
+    linuxX64()
+    macosArm64()
+    macosX64()
+    mingwX64()
+    tvosArm64()
+    tvosSimulatorArm64()
+    tvosX64()
+    watchosArm32()
+    watchosArm64()
+    watchosDeviceArm64()
+    watchosSimulatorArm64()
+    watchosX64()
 
     sourceSets {
         commonMain.dependencies {
@@ -52,10 +81,6 @@ kotlin {
         jvmTest.dependencies {
             implementation(libs.ktor.client.cio) // https://ktor.io/docs/client-engines.html#limitations
             implementation(libs.logback.classic)
-        }
-
-        jsTest.dependencies {
-            implementation(libs.ktor.client.js) // https://ktor.io/docs/client-engines.html#limitations
         }
     }
 }
