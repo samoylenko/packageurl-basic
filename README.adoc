@@ -18,15 +18,11 @@ So:
 . Therefore, we don't support any special cases for known package types such as Maven, Docker, PyPI, etc.
 . And we still encode all qualifier values (so no special treatment for `checksum`, `vers`, `repository_url`, `download_url`, `vcs_url`, etc.)
 
-== Supported platforms
-
-Currently only supports JVM and JS platforms.
-
 == Using the library
 
 [source,kotlin]
 ----
 dependencies {
-    implementation("dev.samoylenko:packageurl-basic:0.2.0")
+    implementation("dev.samoylenko:packageurl-basic:0.2.1")
 }
 ----
